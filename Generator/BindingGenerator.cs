@@ -116,7 +116,7 @@ namespace ImGui
             void* _Placeholder;
         }}
 
-        [CRepr]
+        /*[CRepr]
 		public enum DockRequestType
 		{{
 		    None,
@@ -185,7 +185,7 @@ namespace ImGui
 			ImGui.ID dockspaceId = ImGui.GetID(""MainDockspace"");
 			ImGui.DockSpace(dockspaceId);
 			ImGui.End();
-		}}
+		}}*/
 
         // -- Auto-Generated --
 

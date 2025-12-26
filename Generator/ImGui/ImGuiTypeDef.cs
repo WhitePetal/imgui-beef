@@ -29,6 +29,7 @@ namespace ImGuiBeefGenerator.ImGui
                 string value;
 
                 if (name == "BitArrayForNamedKeys") value = "BitArray<const Key.NamedKey_COUNT, const -Key.NamedKey_BEGIN>";
+                else if (name == "StbTexteditState" || name == "stbrp_node_im") value = "void";
                 else value = ImGui.FixType(typedef.Value.Replace(";", ""));
 
                 list.Add(new ImGuiTypeDef(name, value));

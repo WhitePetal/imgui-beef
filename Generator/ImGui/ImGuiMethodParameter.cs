@@ -106,7 +106,9 @@ namespace ImGuiBeefGenerator.ImGui
                 {
                     var argStrSplit = argStr.Split(' ');
                     var type = argStrSplit[0];
-                    var name = argStrSplit[1];
+                    string name = "";
+                    if(argStrSplit.Length > 1)
+                        name = argStrSplit[1];
                     paramList.Add(new ImGuiMethodParameter(name, type));
                 }
             }
@@ -179,7 +181,10 @@ namespace ImGuiBeefGenerator.ImGui
             else if (Name == "self")
                 return "Self* self";
             else
-                return $"{Type} {Name}";
+            {
+                string type = Type.TrimStart();
+                return $"{ImGui.RemovePrefix(type)} {Name}";
+            }
         }
 
         public string ToDefinitionArg()

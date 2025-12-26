@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ImGuiBeefGenerator.ImGui
 {
@@ -17,6 +19,11 @@ namespace ImGuiBeefGenerator.ImGui
             { "ImVec4(1,1,1,1)", "Vec4.Ones" },
         };
 
+        //private static readonly Regex FuncPtrRegex = new Regex(
+        //    @"^(?<RetType>.+?)\s*\(\*\)\s*\((?<Params>.+)\)$",
+        //    RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace
+        //);
+
         public static string FixDefaultValue(string value)
         {
             if (WellKnownDefaultValues.TryGetValue(value, out string beefValue))
@@ -29,7 +36,7 @@ namespace ImGuiBeefGenerator.ImGui
 
         public static string FixType(string type)
         {
-            if (type.Contains("_") && !IsFunctionPointer(type) && !type.EndsWith("_t") && !type.EndsWith("_t*"))
+            if (type.Contains("_") && !IsFunctionPointer(type) && !type.EndsWith("_t") && !type.EndsWith("_t*") && !type.EndsWith("_c") && !type.EndsWith("_c*"))
                 return FixTemplate(type);
 
             var fixedType = type;
@@ -37,7 +44,6 @@ namespace ImGuiBeefGenerator.ImGui
             fixedType = fixedType.Replace(" const", "");
             fixedType = fixedType.Replace("unsigned ", "u");
             fixedType = fixedType.Replace("signed ", "");
-            fixedType = fixedType.Replace("_t", "");
             fixedType = fixedType.Replace("long long", "int64");
             fixedType = fixedType.Replace("ulong long", "uint64");
             fixedType = RemovePrefix(fixedType);
@@ -48,6 +54,11 @@ namespace ImGuiBeefGenerator.ImGui
                 fixedType = $"{fixedType.Remove(fixedType.Length - 4, 4)}int32*";
 
             fixedType = fixedType.Replace("int[", "int32[");
+
+            if (fixedType.EndsWith("_t") || fixedType.EndsWith("_c"))
+                fixedType = fixedType.Remove(fixedType.Length - 2, 2);
+            else if (fixedType.EndsWith("_t*") || fixedType.EndsWith("_c*"))
+                fixedType = fixedType.Remove(fixedType.Length - 3, 3);
 
             if (IsFunctionPointer(fixedType))
             {
