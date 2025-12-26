@@ -1,4 +1,4 @@
 [submodule "cimgui"]
 	path = cimgui
-	url = git@github.com:WhitePetal/cimgui.git
+	url = https://github.com/WhitePetal/cimgui.git
 	branch = docking_inter
