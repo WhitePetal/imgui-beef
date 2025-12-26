@@ -38,7 +38,7 @@ namespace ImGuiBeefGenerator.ImGui
 
         public static ImGuiMethodDefinition FromVariation(Dictionary<string, object> variation)
         {
-            if (((string) variation["args"]).Contains("va_list") || ((string) variation["ov_cimguiname"]).EndsWith("_const"))
+            if (((string) variation["args"]).Contains("va_list") || ((string)variation["ov_cimguiname"]).StartsWith("ImVector") || ((string) variation["ov_cimguiname"]).EndsWith("_const"))
                 return null;
 
             if (variation.ContainsKey("destructor"))
