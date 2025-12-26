@@ -1,5 +1,5 @@
 // -- GENERATION INFORMATION --
-// Date: 2025/12/26 17:14:31
+// Date: 2025/12/26 17:15:36
 // Constructors: 110
 // Destructors: 87
 // Enums: 83
@@ -164,7 +164,7 @@ namespace ImGui
         public typealias Wchar = Wchar16;
         public typealias Wchar16 = ushort;
         public typealias Wchar32 = uint32;
-        public typealias stbrp_node_im = stbrp<node>;
+        public typealias stbrp_node_im = void;
         
         [AllowDuplicates]
         public enum DrawFlags : int32
