@@ -1,5 +1,5 @@
 // -- GENERATION INFORMATION --
-// Date: 2025/12/26 17:15:36
+// Date: 2025/12/26 18:26:51
 // Constructors: 110
 // Destructors: 87
 // Enums: 83
@@ -2374,8 +2374,8 @@ namespace ImGui
         [CRepr]
         public struct FontAtlasBuilder
         {
-            public stbrp<context<opaque>> PackContext;
-            public Vector<stbrp<node<im>>> PackNodes;
+            public stbrp_context_opaque PackContext;
+            public Vector<stbrp_node_im> PackNodes;
             public Vector<TextureRect> Rects;
             public Vector<FontAtlasRectEntry> RectsIndex;
             public Vector<uchar> TempBuffer;
@@ -2389,7 +2389,7 @@ namespace ImGui
             public Vec2i MaxRectBounds;
             public bool LockDisableResize;
             public bool PreloadedAllGlyphsRanges;
-            public StableVector<FontBaked<<32>>> BakedPool;
+            public StableVector<FontBaked> BakedPool;
             public Storage BakedMap;
             public int32 BakedDiscardedCount;
             public FontAtlasRectId PackIdMouseCursors;
@@ -7829,11 +7829,11 @@ namespace ImGui
         public static U64 ImFileGetSize(FileHandle file) => ImFileGetSizeImpl(file);
         
         [LinkName("igImFileLoadToMemory")]
-        private static extern void* ImFileLoadToMemoryImpl(char* filename, char* mode, size out_file_size, int32 padding_bytes);
+        private static extern void* ImFileLoadToMemoryImpl(char* filename, char* mode, size* out_file_size, int32 padding_bytes);
         #if IMGUI_USE_REF
-        public static ref void ImFileLoadToMemory(char* filename, char* mode, size out_file_size = null, int32 padding_bytes = (int32) 0) { return ref *ImFileLoadToMemoryImpl(filename, mode, out_file_size, padding_bytes); }
+        public static ref void ImFileLoadToMemory(char* filename, char* mode, size* out_file_size = null, int32 padding_bytes = (int32) 0) { return ref *ImFileLoadToMemoryImpl(filename, mode, out_file_size, padding_bytes); }
         #else
-        public static void* ImFileLoadToMemory(char* filename, char* mode, size out_file_size = null, int32 padding_bytes = (int32) 0) => ImFileLoadToMemoryImpl(filename, mode, out_file_size, padding_bytes);
+        public static void* ImFileLoadToMemory(char* filename, char* mode, size* out_file_size = null, int32 padding_bytes = (int32) 0) => ImFileLoadToMemoryImpl(filename, mode, out_file_size, padding_bytes);
         #endif
         
         [LinkName("igImFileOpen")]
@@ -8371,11 +8371,11 @@ namespace ImGui
         #endif
         
         [LinkName("igImStrdupcpy")]
-        private static extern char* ImStrdupcpyImpl(char* dst, size p_dst_size, char* str);
+        private static extern char* ImStrdupcpyImpl(char* dst, size* p_dst_size, char* str);
         #if IMGUI_USE_REF
-        public static ref char ImStrdupcpy(char* dst, size p_dst_size, char* str) { return ref *ImStrdupcpyImpl(dst, p_dst_size, str); }
+        public static ref char ImStrdupcpy(char* dst, size* p_dst_size, char* str) { return ref *ImStrdupcpyImpl(dst, p_dst_size, str); }
         #else
-        public static char* ImStrdupcpy(char* dst, size p_dst_size, char* str) => ImStrdupcpyImpl(dst, p_dst_size, str);
+        public static char* ImStrdupcpy(char* dst, size* p_dst_size, char* str) => ImStrdupcpyImpl(dst, p_dst_size, str);
         #endif
         
         [LinkName("igImStreolRange")]
@@ -9400,11 +9400,11 @@ namespace ImGui
         public static void SaveIniSettingsToDisk(char* ini_filename) => SaveIniSettingsToDiskImpl(ini_filename);
         
         [LinkName("igSaveIniSettingsToMemory")]
-        private static extern char* SaveIniSettingsToMemoryImpl(size out_ini_size);
+        private static extern char* SaveIniSettingsToMemoryImpl(size* out_ini_size);
         #if IMGUI_USE_REF
-        public static ref char SaveIniSettingsToMemory(size out_ini_size = null) { return ref *SaveIniSettingsToMemoryImpl(out_ini_size); }
+        public static ref char SaveIniSettingsToMemory(size* out_ini_size = null) { return ref *SaveIniSettingsToMemoryImpl(out_ini_size); }
         #else
-        public static char* SaveIniSettingsToMemory(size out_ini_size = null) => SaveIniSettingsToMemoryImpl(out_ini_size);
+        public static char* SaveIniSettingsToMemory(size* out_ini_size = null) => SaveIniSettingsToMemoryImpl(out_ini_size);
         #endif
         
         [LinkName("igScaleWindowsInViewport")]

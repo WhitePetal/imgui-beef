@@ -94,6 +94,8 @@ namespace ImGuiBeefGenerator.ImGui
                 }
                 else if (argStr.Contains("*"))
                 {
+                    if (argStr.StartsWith("size_t*"))
+                        Console.WriteLine($"test argStr: {argStr}");
                     var name = argStr.Substring(argStr.LastIndexOf('*') + 1).Trim();
                     var type = argStr.Substring(0, argStr.LastIndexOf('*') + 1);
                     paramList.Add(new ImGuiMethodParameter(name, type));

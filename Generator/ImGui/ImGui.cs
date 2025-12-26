@@ -57,7 +57,9 @@ namespace ImGuiBeefGenerator.ImGui
 
             if (fixedType.EndsWith("_t") || fixedType.EndsWith("_c"))
                 fixedType = fixedType.Remove(fixedType.Length - 2, 2);
-            else if (fixedType.EndsWith("_t*") || fixedType.EndsWith("_c*"))
+            else if(fixedType.EndsWith("_t*"))
+                fixedType = fixedType.Remove(fixedType.Length - 3, 2);
+            else if (fixedType.EndsWith("_c*"))
                 fixedType = fixedType.Remove(fixedType.Length - 3, 3);
 
             if (IsFunctionPointer(fixedType))
@@ -74,10 +76,13 @@ namespace ImGuiBeefGenerator.ImGui
         {
             var fixedTemplate = template.Replace("const ", "");
 
-            if (fixedTemplate == "STB_TexteditState" || fixedTemplate.StartsWith("SDL_"))
+            if (fixedTemplate == "STB_TexteditState" || fixedTemplate.StartsWith("SDL_") || fixedTemplate == "stbrp_context_opaque" || fixedTemplate == "stbrp_node_im")
                 return fixedTemplate;
 
             fixedTemplate = fixedTemplate.Replace("const_", "");
+
+            if (fixedTemplate.EndsWith("__32"))
+                fixedTemplate = fixedTemplate.Remove(fixedTemplate.Length - 4, 4);
 
             bool isPointer = false;
             if (fixedTemplate.EndsWith(" *"))
@@ -88,6 +93,7 @@ namespace ImGuiBeefGenerator.ImGui
 
             if (fixedTemplate.Contains("_"))
             {
+                Console.WriteLine($"fixedTemplate: {fixedTemplate}");
                 var newTemplate = FixType(fixedTemplate.Substring(0, fixedTemplate.IndexOf('_')));
                 newTemplate += "<";
                 fixedTemplate = newTemplate + FixType(fixedTemplate.Substring(fixedTemplate.IndexOf('_') + 1));
