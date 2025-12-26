@@ -33,7 +33,7 @@ namespace ImGuiBeefGenerator
 
 			Bindings.AddRange(ImGuiStruct.From(structs_and_enums["structs"], ref methods));
 			Bindings.AddRange(methods);
-            Bindings.AddRange(ImGuiImplStruct.From(ReadBindingData("impl_definitions.json")));
+            //Bindings.AddRange(ImGuiImplStruct.From(ReadBindingData("impl_definitions.json")));
         }
 
         public Dictionary<string, string> Generate(bool includeGenerationInfo = false)
@@ -200,10 +200,10 @@ namespace ImGui
 			files.Add("src/ImGui.bf", imguiFile);
 
 
-			files["ImGuiImplGlfw/src/ImGuiImplGlfw.bf"] = GenerateImplFile("ImGuiImplGlfw", Bindings);
-			files["ImGuiImplOpenGL2/src/ImGuiImplOpenGL2.bf"] = GenerateImplFile("ImGuiImplOpenGL2", Bindings);
-			files["ImGuiImplOpenGL3/src/ImGuiImplOpenGL3.bf"] = GenerateImplFile("ImGuiImplOpenGL3", Bindings);
-			files["ImGuiImplSDL/src/ImGuiImplSDL.bf"] = GenerateImplFile("ImGuiImplSDL2", Bindings);
+			//files["ImGuiImplGlfw/src/ImGuiImplGlfw.bf"] = GenerateImplFile("ImGuiImplGlfw", Bindings);
+			//files["ImGuiImplOpenGL2/src/ImGuiImplOpenGL2.bf"] = GenerateImplFile("ImGuiImplOpenGL2", Bindings);
+			//files["ImGuiImplOpenGL3/src/ImGuiImplOpenGL3.bf"] = GenerateImplFile("ImGuiImplOpenGL3", Bindings);
+			//files["ImGuiImplSDL/src/ImGuiImplSDL.bf"] = GenerateImplFile("ImGuiImplSDL2", Bindings);
 
 			return files;
         }
